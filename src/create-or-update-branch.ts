@@ -92,7 +92,8 @@ export async function createOrUpdateBranch(
   branch: string,
   branchRemoteName: string,
   signoff: boolean,
-  addPaths: string[]
+  addPaths: string[],
+  rebase: boolean
 ): Promise<CreateOrUpdateBranchResult> {
   // Get the working base.
   // When a ref, it may or may not be the actual base.
@@ -158,7 +159,7 @@ export async function createOrUpdateBranch(
 
   // If the working base is not the base, rebase the temp branch commits
   // This will also be true if the working base type is a commit
-  if (workingBase != base) {
+  if (rebase && workingBase != base) {
     core.info(
       `Rebasing commits made to ${workingBaseType} '${workingBase}' on to base branch '${base}'`
     )

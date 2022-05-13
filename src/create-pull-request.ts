@@ -30,6 +30,7 @@ export interface Inputs {
   teamReviewers: string[]
   milestone: number
   draft: boolean
+  rebase: boolean
 }
 
 export async function createPullRequest(inputs: Inputs): Promise<void> {
@@ -175,7 +176,8 @@ export async function createPullRequest(inputs: Inputs): Promise<void> {
       inputs.branch,
       branchRemoteName,
       inputs.signoff,
-      inputs.addPaths
+      inputs.addPaths,
+      inputs.rebase
     )
     core.endGroup()
 
